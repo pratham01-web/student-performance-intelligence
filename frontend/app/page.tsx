@@ -10,7 +10,7 @@ export default function Home() {
             </span>
           </div>
           <span className="text-xs font-semibold px-2.5 py-1 rounded bg-blue-950 text-blue-400 border border-blue-800">
-            Phase 1 — Project Foundation
+            Phase 2 — Database Architecture Ready
           </span>
         </div>
 
@@ -29,18 +29,18 @@ export default function Home() {
             <div className="text-sm font-semibold text-slate-200">Next.js 15 &bull; TypeScript &bull; Tailwind CSS</div>
           </div>
           <div className="p-4 rounded-lg bg-slate-800/60 border border-slate-700/60">
-            <div className="text-xs font-medium text-slate-400 mb-1">Backend Stack</div>
-            <div className="text-sm font-semibold text-slate-200">FastAPI &bull; Python 3.10 &bull; Pydantic &bull; SQLAlchemy</div>
+            <div className="text-xs font-medium text-slate-400 mb-1">Backend & Database Stack</div>
+            <div className="text-sm font-semibold text-slate-200">FastAPI &bull; SQLAlchemy 2.0 &bull; PostgreSQL &bull; Alembic</div>
           </div>
         </div>
 
         <div className="rounded-lg bg-slate-950/70 border border-slate-800 p-4">
           <div className="flex items-center justify-between text-xs text-slate-400">
-            <span>Status</span>
-            <span className="font-mono text-emerald-400">Foundation Verified</span>
+            <span>Database Layer</span>
+            <span className="font-mono text-emerald-400">Models &amp; Migrations Ready</span>
           </div>
           <div className="mt-2 text-xs text-slate-500">
-            Database models, data pipelines, ML inference, and dashboard interfaces will be implemented in subsequent phases.
+            PostgreSQL relational models (Students, Academic Records, Study Habits, Model Versions, Predictions) and Alembic migrations successfully initialized.
           </div>
         </div>
       </div>

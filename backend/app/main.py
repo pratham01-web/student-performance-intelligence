@@ -5,7 +5,7 @@ from app.core.config import settings
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    description="Backend API for Student Performance Intelligence System (Phase 1 Foundation)",
+    description="Backend API for Student Performance Intelligence System (Phase 2 Database Layer)",
 )
 
 # CORS Middleware setup
