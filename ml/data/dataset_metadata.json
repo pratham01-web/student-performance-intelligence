@@ -1,0 +1,100 @@
+{
+  "dataset_name": "Student Performance Intelligence Synthetic Dataset",
+  "version": "1.0.0",
+  "is_synthetic": true,
+  "sample_count": 2000,
+  "random_seed": 42,
+  "generator_script": "ml/data/generate_dataset.py",
+  "generation_methodology": "Statistically grounded multivariate generative simulation incorporating Gamma, Beta, and Gaussian distributions with empirical academic performance correlations.",
+  "features": {
+    "student_code": {
+      "type": "string",
+      "description": "Unique student identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Full student name"
+    },
+    "age": {
+      "type": "integer",
+      "range": [
+        14,
+        22
+      ]
+    },
+    "gender": {
+      "type": "string",
+      "categories": [
+        "Male",
+        "Female",
+        "Other"
+      ]
+    },
+    "class_level": {
+      "type": "string",
+      "categories": [
+        "9th",
+        "10th",
+        "11th",
+        "12th",
+        "Undergraduate"
+      ]
+    },
+    "semester": {
+      "type": "string",
+      "categories": [
+        "Semester 1",
+        "Semester 2",
+        "Semester 3",
+        "Semester 4"
+      ]
+    },
+    "study_hours": {
+      "type": "float",
+      "description": "Daily study hours",
+      "mean": 3.65
+    },
+    "sleep_hours": {
+      "type": "float",
+      "description": "Daily sleep hours",
+      "mean": 7.03
+    },
+    "screen_time": {
+      "type": "float",
+      "description": "Daily screen time",
+      "mean": 3.55
+    },
+    "study_days": {
+      "type": "integer",
+      "range": [
+        1,
+        7
+      ]
+    },
+    "attendance": {
+      "type": "float",
+      "description": "Attendance percentage",
+      "mean": 77.98
+    },
+    "previous_marks": {
+      "type": "float",
+      "description": "Prior semester marks percentage",
+      "mean": 63.77
+    }
+  },
+  "targets": {
+    "exam_score": {
+      "type": "float",
+      "task": "regression",
+      "description": "Final realized exam score (0.0 - 100.0)",
+      "mean": 58.27,
+      "std": 12.72
+    },
+    "passed": {
+      "type": "integer",
+      "task": "classification",
+      "description": "Binary pass/fail outcome (1 if exam_score >= 50.0 else 0)",
+      "pass_rate": 0.7385
+    }
+  }
+}

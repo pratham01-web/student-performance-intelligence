@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from app.api.v1.router import api_router
 from app.core.config import settings
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    description="Backend API for Student Performance Intelligence System (Phase 2 Database Layer)",
+    description="Backend API and ML Inference Services for Student Performance Intelligence System",
 )
 
 # CORS Middleware setup
@@ -17,8 +18,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Include master API router
+app.include_router(api_router)
+
 
 @app.get("/health", tags=["Health"])
 def get_health() -> dict[str, str]:
-    """Health check endpoint for Phase 1 verification."""
+    """Health check endpoint for operational verification."""
     return {"status": "healthy"}
+

@@ -17,13 +17,18 @@ export const metadata: Metadata = {
   description: "Phase 1 Foundation - End-to-end ML application for academic performance prediction",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+import { Navbar } from "@/components/Navbar";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-slate-950 text-slate-100 selection:bg-blue-600 selection:text-white">
+        <Navbar />
+        <main className="flex-1">{children}</main>
+      </body>
     </html>
   );
 }

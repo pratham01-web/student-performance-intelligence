@@ -1,0 +1,112 @@
+{
+  "training_run_id": "run_20260920_164847",
+  "trained_at": "2026-09-20T11:18:47.589992+00:00",
+  "dataset_version": "v1.0.0",
+  "random_seed": 42,
+  "train_samples": 1600,
+  "test_samples": 400,
+  "features": [
+    "study_hours",
+    "sleep_hours",
+    "screen_time",
+    "study_days",
+    "attendance",
+    "previous_marks",
+    "age",
+    "gender",
+    "class_level",
+    "semester"
+  ],
+  "models": {
+    "marks_linear_regression": {
+      "model_name": "marks_linear_regression",
+      "algorithm": "LinearRegression",
+      "task": "regression",
+      "version": "v1.0.0",
+      "parameters": {
+        "fit_intercept": true
+      },
+      "metrics": {
+        "mae": 4.579,
+        "rmse": 5.766,
+        "r2": 0.7662
+      },
+      "artifact_path": "ml/artifacts/marks_linear_regression.joblib"
+    },
+    "marks_random_forest": {
+      "model_name": "marks_random_forest",
+      "algorithm": "RandomForestRegressor",
+      "task": "regression",
+      "version": "v1.0.0",
+      "parameters": {
+        "n_estimators": 120,
+        "max_depth": 10,
+        "min_samples_split": 4
+      },
+      "metrics": {
+        "mae": 4.795,
+        "rmse": 6.013,
+        "r2": 0.7457
+      },
+      "artifact_path": "ml/artifacts/marks_random_forest.joblib"
+    },
+    "pass_fail_logistic_regression": {
+      "model_name": "pass_fail_logistic_regression",
+      "algorithm": "LogisticRegression",
+      "task": "classification",
+      "version": "v1.0.0",
+      "parameters": {
+        "C": 1.0,
+        "max_iter": 1000
+      },
+      "metrics": {
+        "accuracy": 0.885,
+        "precision": 0.9136,
+        "recall": 0.9322,
+        "f1": 0.9228,
+        "roc_auc": 0.9222,
+        "confusion_matrix": [
+          [
+            79,
+            26
+          ],
+          [
+            20,
+            275
+          ]
+        ]
+      },
+      "artifact_path": "ml/artifacts/pass_fail_logistic_regression.joblib"
+    },
+    "pass_fail_random_forest": {
+      "model_name": "pass_fail_random_forest",
+      "algorithm": "RandomForestClassifier",
+      "task": "classification",
+      "version": "v1.0.0",
+      "parameters": {
+        "n_estimators": 120,
+        "max_depth": 8
+      },
+      "metrics": {
+        "accuracy": 0.85,
+        "precision": 0.873,
+        "recall": 0.9322,
+        "f1": 0.9016,
+        "roc_auc": 0.9134,
+        "confusion_matrix": [
+          [
+            65,
+            40
+          ],
+          [
+            20,
+            275
+          ]
+        ]
+      },
+      "artifact_path": "ml/artifacts/pass_fail_random_forest.joblib"
+    }
+  },
+  "active_regression_model": "marks_linear_regression",
+  "active_classification_model": "pass_fail_logistic_regression"
+}
