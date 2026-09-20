@@ -3,7 +3,9 @@
  * Adheres to AGENTS.md Section 7: Frontend -> FastAPI -> Database.
  */
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_BASE =
+  process.env.NEXT_PUBLIC_API_URL ||
+  (process.env.NODE_ENV === "production" ? "" : "http://localhost:8000");
 
 export interface Student {
   id: number;
