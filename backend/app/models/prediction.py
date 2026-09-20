@@ -33,7 +33,7 @@ class Prediction(Base):
     model_version_id: Mapped[int | None] = mapped_column(
         Integer, ForeignKey("model_versions.id", ondelete="RESTRICT"), nullable=True, index=True
     )
-    model_version: Mapped[str] = mapped_column(String(50), nullable=False)
+    model_version: Mapped[str] = mapped_column(String(100), nullable=False)
     prediction_type: Mapped[str] = mapped_column(String(32), nullable=False)
     predicted_marks: Mapped[float | None] = mapped_column(Float, nullable=True)
     pass_probability: Mapped[float | None] = mapped_column(Float, nullable=True)
