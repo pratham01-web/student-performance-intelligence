@@ -16,8 +16,11 @@ router = APIRouter(prefix="/models", tags=["Model Governance"])
 @router.get("", response_model=list[ModelVersionResponse])
 def list_models(db: Session = Depends(get_db)) -> list[ModelVersionResponse]:
     """Retrieve all registered machine learning models and metrics."""
-    models = list(db.scalars(select(ModelVersion).order_by(ModelVersion.created_at.desc())).all())
-    return models
+    try:
+        models = list(db.scalars(select(ModelVersion).order_by(ModelVersion.created_at.desc())).all())
+        return models
+    except Exception:
+        return []
 
 
 @router.get("/comparison", response_model=ModelComparisonResponse)

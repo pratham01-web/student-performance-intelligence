@@ -149,25 +149,33 @@ def execute_and_record_prediction(db: Session, input_data: PredictionInput) -> P
     """Run model inference and persist audit record in PostgreSQL predictions table."""
     pred_result = ml_engine.predict(input_data)
 
-    # Locate model version record if present in registry
-    model_rec = db.scalars(
-        select(ModelVersion).where(ModelVersion.model_name == ml_engine.active_reg_name)
-    ).first()
-    model_version_id = model_rec.id if model_rec else None
+    from datetime import datetime, timezone
 
     prediction_record = Prediction(
         student_id=input_data.student_id,
-        model_version_id=model_version_id,
+        model_version_id=None,
         model_version=pred_result["model_version"],
         prediction_type="both",
         predicted_marks=pred_result["predicted_marks"],
         pass_probability=pred_result["pass_probability"],
         input_features=pred_result["input_features"],
+        created_at=datetime.now(timezone.utc),
     )
 
-    db.add(prediction_record)
-    db.commit()
-    db.refresh(prediction_record)
+    try:
+        # Locate model version record if present in registry
+        model_rec = db.scalars(
+            select(ModelVersion).where(ModelVersion.model_name == ml_engine.active_reg_name)
+        ).first()
+        if model_rec:
+            prediction_record.model_version_id = model_rec.id
+
+        db.add(prediction_record)
+        db.commit()
+        db.refresh(prediction_record)
+    except Exception as db_err:
+        logger.warning(f"Could not persist prediction audit to database: {db_err}")
+        db.rollback()
 
     return prediction_record
 

@@ -30,6 +30,23 @@ app.add_middleware(
 app.include_router(api_router)
 
 
+from fastapi.responses import JSONResponse
+from fastapi import Request
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception) -> JSONResponse:
+    """Catch-all exception handler preventing serverless crashes and returning structured JSON."""
+    logger.error("Unhandled exception on %s: %s", request.url.path, exc, exc_info=True)
+    return JSONResponse(
+        status_code=500,
+        content={"detail": f"Server processing error: {str(exc)}"},
+    )
+
+
 @app.get("/health", tags=["Health"])
 def get_health() -> dict[str, str]:
     """Health check endpoint for operational verification."""

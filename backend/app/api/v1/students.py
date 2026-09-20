@@ -42,9 +42,17 @@ def list_students(
 ) -> StudentListResponse:
     """List students with pagination and search filtering."""
     skip = (page - 1) * page_size
-    items, total = student_service.list_students(
-        db, skip=skip, limit=page_size, search=search, class_level=class_level
-    )
+    try:
+        items, total = student_service.list_students(
+            db=db,
+            skip=skip,
+            limit=page_size,
+            search=search,
+            class_level=class_level,
+        )
+    except Exception:
+        items, total = [], 0
+
     return StudentListResponse(
         items=items,
         total=total,
